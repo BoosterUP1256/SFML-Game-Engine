@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include <SFML/Graphics.hpp>
 
 class Animation {
@@ -15,7 +16,7 @@ private:
 
 public:
     Animation(std::vector<sf::Texture>& frames, float speed, bool looping = true);
-    Animation(const sf::Image& spriteSheet, int frameWidth, int frameHeight, float speed, bool looping = true);
+    Animation(const std::string& spriteSheet, int frameWidth, int frameHeight, float speed, bool looping = true);
     Animation() = default;
 
     void loadFromSpriteSheet(const sf::Image& spriteSheet, int frameWidth, int frameHeight);

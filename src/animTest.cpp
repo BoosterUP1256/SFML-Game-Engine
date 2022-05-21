@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
+#include "Assets.hpp"
 #include <iostream>
 
 int main() 
@@ -37,15 +38,26 @@ int main()
     sprite.setPosition(100, 100);;
     anim.start();
 
+    Assets assets;
+
     // from spritesheet
     sf::Image spriteSheet;
     spriteSheet.loadFromFile("../fum.png");
-    Animation anim2(spriteSheet, 24, 32, 100, true);
-    anim2.start();
+    Animation anim2("../fum.png", 24, 32, 100, true);
 
     sf::Sprite sprite2(anim2.currentFrame());
     sprite2.setPosition(400, 400);
     sprite2.setScale(5, 5);
+
+    assets.addAnimation("run", anim2);
+    assets.getAnimation("run").start();
+
+    // audio asset test
+    assets.addSoundBuffer("test", "../testSound.wav");
+    assets.addSoundBuffer("scream", "../testSound2.wav");
+
+    sf::Sound sound(assets.getSoundBuffer("test"));
+    sf::Sound sound2(assets.getSoundBuffer("scream"));
 
     while (window.isOpen())
     {
@@ -56,31 +68,34 @@ int main()
                 window.close();
 
             if (event.key.code == sf::Keyboard::Space && event.type == sf::Event::KeyPressed) {
-                if (anim.isRunning())
-                    anim.stop();
+                sound.play();
+                if (assets.getAnimation("run").isRunning())
+                    assets.getAnimation("run").stop();
                 else
-                    anim.start();
+                    assets.getAnimation("run").start();
             }
 
-            if (event.key.code == sf::Keyboard::Enter && event.type == sf::Event::KeyPressed)
-                anim.setCurrentFrame(3);
+            else if (event.key.code == sf::Keyboard::Enter && event.type == sf::Event::KeyPressed) {
+                sound2.play();
+                assets.getAnimation("run").setCurrentFrame(3);
+            }
         }
 
         window.clear();
 
         // multiple pictures
 
-        anim.update();
+        assets.getAnimation("run").update();
 
-        sprite.setTexture(anim.currentFrame());
+        sprite.setTexture(assets.getAnimation("run").currentFrame());
 
-        if (!anim.isFinished())
+        if (!assets.getAnimation("run").isFinished())
             window.draw(sprite);
 
         // spritesheet
 
-        anim2.update();
-        sprite2.setTexture(anim2.currentFrame());
+        assets.getAnimation("run").update();
+        sprite2.setTexture(assets.getAnimation("run").currentFrame());
         window.draw(sprite2);
 
         window.display();

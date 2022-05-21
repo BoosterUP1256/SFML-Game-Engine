@@ -3,8 +3,10 @@
 Animation::Animation(std::vector<sf::Texture>& frames, float speed, bool looping)
     : m_frames(frames), m_speed(speed), m_looping(looping) {}
 
-Animation::Animation(const sf::Image& spriteSheet, int frameWidth, int frameHeight, float speed, bool looping)
+Animation::Animation(const std::string& path, int frameWidth, int frameHeight, float speed, bool looping)
     : m_speed(speed), m_looping(looping) {
+        sf::Image spriteSheet;
+        spriteSheet.loadFromFile(path);
         loadFromSpriteSheet(spriteSheet, frameWidth, frameHeight);
 }
 
