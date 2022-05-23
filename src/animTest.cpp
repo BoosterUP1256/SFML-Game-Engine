@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
-#include "Assets.hpp"
+#include "AssetManager.hpp"
 #include <iostream>
 
 int main() 
@@ -38,7 +38,7 @@ int main()
     sprite.setPosition(100, 100);;
     anim.start();
 
-    Assets assets;
+    AssetManager assets;
 
     // from spritesheet
     sf::Image spriteSheet;
@@ -56,8 +56,13 @@ int main()
     assets.addSoundBuffer("test", "../testSound.wav");
     assets.addSoundBuffer("scream", "../testSound2.wav");
 
+    assets.addFont("font", "../assets/fonts/arial.ttf");
+
     sf::Sound sound(assets.getSoundBuffer("test"));
     sf::Sound sound2(assets.getSoundBuffer("scream"));
+
+    sf::Text hello("hello there", assets.getFont("font"));
+    hello.setPosition(50, 50);
 
     while (window.isOpen())
     {
@@ -97,6 +102,7 @@ int main()
         assets.getAnimation("run").update();
         sprite2.setTexture(assets.getAnimation("run").currentFrame());
         window.draw(sprite2);
+        window.draw(hello);
 
         window.display();
     }

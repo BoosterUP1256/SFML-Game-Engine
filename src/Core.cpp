@@ -2,12 +2,14 @@
 #include "Action.hpp"
 #include "Scene_Test.hpp"
 #include "Scene_Test2.hpp"
+#include "Scene_Menu.hpp"
 
 Core::Core()
     :
     m_window(sf::VideoMode(800, 600), "Window"),
-    m_currentScene("main") {
-        m_scenes.emplace(m_currentScene, std::make_unique<Scene_Test>(*this));
+    m_currentScene("menu") {
+        m_scenes.emplace(m_currentScene, std::make_unique<Scene_Menu>(*this));
+        m_scenes.emplace("main", std::make_unique<Scene_Test>(*this));
         m_scenes.emplace("scene 2", std::make_unique<Scene_Test2>(*this));
 }
 

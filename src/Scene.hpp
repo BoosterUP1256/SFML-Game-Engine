@@ -5,6 +5,7 @@
 #include <memory>
 #include "Action.hpp"
 #include "EntityManager.hpp"
+#include "AssetManager.hpp"
 
 class Core;
 
@@ -15,6 +16,7 @@ protected:
     Core&         m_game;
     ActionMap     m_actionMap;
     EntityManager m_entities;
+    AssetManager  m_assets;
 
     Scene(Core& game);
 

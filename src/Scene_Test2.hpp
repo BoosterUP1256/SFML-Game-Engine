@@ -16,7 +16,7 @@ public:
     void render() override {
         
     }
-
+    
     void sDoAction(const Action& action) override {
         if (action.type() == "START") {
            if (action.name() == "SAY POO2") std::cout << "Poo222 Start" << std::endl;

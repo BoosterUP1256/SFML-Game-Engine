@@ -7,7 +7,7 @@
 #include <SFML/Audio.hpp>
 #include "Animation.hpp"
 
-class Assets {
+class AssetManager {
 private:
     std::map<std::string, sf::Texture>     m_textureMap;
     std::map<std::string, Animation>       m_animationMap;

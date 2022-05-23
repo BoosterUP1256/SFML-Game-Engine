@@ -10,9 +10,9 @@ target_sources(${PROJECT_NAME}
             EntityManager.hpp EntityManager.cpp
             Vec2.hpp Vec2.cpp
             Animation.hpp Animation.cpp
-            Assets.hpp Assets.cpp
+            AssetManager.hpp AssetManager.cpp
             Components.hpp
-            #main.cpp
-            animTest.cpp
+            main.cpp
+            #animTest.cpp
         )
         
